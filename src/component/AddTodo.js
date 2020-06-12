@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, TextInput, View, Alert} from 'react-native';
+import {Button, TextInput, View} from 'react-native';
 import {styles} from '../assets/basic';
 
 function AddTodo(props) {
@@ -16,7 +16,6 @@ function AddTodo(props) {
       />
       <Button
         onPress={() => {
-          Alert.alert('저장할게요.');
           submit({desc: data, status: 'active'});
           onChangeText('');
         }}
@@ -24,7 +23,6 @@ function AddTodo(props) {
         title="Add Todo"
       />
     </View>
-    // </form>
   );
 }
 
