@@ -1,10 +1,16 @@
 import React from 'react';
 import {View, Text, Button} from 'react-native';
 import {styles} from '../assets/basic';
+import {useMutation} from '@apollo/react-hooks';
+import {LIKE_TODO} from '../graphql/todoQuery';
 
 function TodoList(props) {
-  let {id, desc, status, onDelete, onUpdate} = props;
-  console.log(id, desc, status);
+  let {id, desc, status, isLiked, onDelete, onUpdate} = props;
+  const [toggleLikeTodo] = useMutation(LIKE_TODO, {
+    variables: {id: id, isLiked},
+  });
+
+  console.log({id, desc, status, isLiked});
   return (
     <View style={styles.contentText}>
       {status === 'complete' ? (
@@ -34,6 +40,7 @@ function TodoList(props) {
         color="skyblue"
         title="&times;"
       />
+      <Button onPress={toggleLikeTodo} title={isLiked ? 'UnLike' : 'Like'} />
     </View>
   );
 }
